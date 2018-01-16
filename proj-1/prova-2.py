@@ -2,21 +2,19 @@ import random
 import string
 
 import cherrypy
-from cherrypy.lib import sessions
+
 from jinja2 import Environment, FileSystemLoader
 env1 = Environment(loader=FileSystemLoader('templates'))
+tmpl = env1.get_template('template.html')
+numeroRandom = random.randint(1,100)
 class numberGenerator(object):
     @cherrypy.expose
     def index(self):
-        tmpl = env1.get_template('template.html')
         return tmpl.render()
 
     @cherrypy.expose
     def generate(self, respuesta):
-        cherrypy.session['sad']
-        numeroRandom = random.randint(1,100)
         res= int(respuesta)
-        print (numeroRandom, respuesta)
         if numeroRandom == res:
             return """<h1>has acertado!</h1>"""
         else:
